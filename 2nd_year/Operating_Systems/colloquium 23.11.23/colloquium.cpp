@@ -57,7 +57,7 @@ int main(int argc, char* argv[])
     vector<thread> threads;
     for (int i = 1; i <= num_threads; ++i)
     {
-        std::string filename = directory + "/in_" + to_string(i) + ".dat.txt";
+        string filename = directory + "/in_" + to_string(i) + ".dat.txt";
         threads.emplace_back(processFile, filename);
     }
 
@@ -70,12 +70,12 @@ int main(int argc, char* argv[])
     ofstream result_file(directory + "/out.dat.txt");
     if (result_file.is_open())
     {
-        result_file << result << std::endl;
+        result_file << result << endl;
         result_file.close();
     }
     else
     {
-        cout << "Failed to open result file" << std::endl;
+        cout << "Failed to open result file" << endl;
         return 1;
     }
 
