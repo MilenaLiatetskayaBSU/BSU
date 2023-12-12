@@ -68,14 +68,6 @@ public class Program {
 	           
 		}
 		
-		/*for(int i = 0; i < (int) Math.pow(2, n); i++)
-		{
-			for(int j = 0; j < n; j++)
-			{
-				fileOut.print(binnumb[i][j]+" ");
-			}
-			fileOut.println("             "+i);
-		}*/
 		
 		int[][] matrsmeznost = new int[size_][size_];
 		for(int i = 0; i < size_; i++)
@@ -88,14 +80,6 @@ public class Program {
 		}
 		
 		
-		/*for(int i = 0; i < (int) Math.pow(2, n); i++)
-		{
-			for(int j = 0; j < (int) Math.pow(2, n); j++)
-			{
-				fileOut.print(matrsmeznost[i][j]+" ");
-			}
-			fileOut.println("             "+i);
-		}*/
 		
 		BigInteger [][]resultmatr = new BigInteger[size_][m+1];
 		BigInteger res;
@@ -122,14 +106,6 @@ public class Program {
 			
 		}
 		
-		/*for(int i = 0; i < (int) Math.pow(2, n); i++)
-		{
-			for(int j = 1; j < m+1; j++)
-			{
-				fileOut.print(resultmatr[i][j]+" ");
-			}
-			fileOut.println(" ");
-		}*/
 		
 		BigInteger k = BigInteger.valueOf(0);
 		
