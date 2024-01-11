@@ -30,18 +30,19 @@ public class archiving {
 
 	}
 	
-	public void read(String outputfilename)
-	 {try(ZipInputStream zin = new ZipInputStream(new FileInputStream(outputfilename+".zip")))
+	public String read(String outputfilename)
+	 {
+		String name="";
+		try(ZipInputStream zin = new ZipInputStream(new FileInputStream(outputfilename+".zip")))
      {
          ZipEntry entry;
-         String name;
          while((entry=zin.getNextEntry())!=null){
                
              name = entry.getName(); 
-             System.out.printf("File name: %s \n", name);
               
              
              FileOutputStream fout = new FileOutputStream("new" + name);
+             name = "new" + name;
              for (int c = zin.read(); c != -1; c = zin.read()) {
                  fout.write(c);
              }
@@ -54,6 +55,8 @@ public class archiving {
            
          System.out.println(ex.getMessage());
      } 
+	 
+	 return name;
 }
 	
 }

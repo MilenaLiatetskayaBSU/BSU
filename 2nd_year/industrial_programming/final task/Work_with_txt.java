@@ -27,7 +27,7 @@ public class Work_with_txt implements FileBuilder {
 	}
 	
 	@Override
-	public ArrayList<Double> Read(String inputname) {
+	public ArrayList<Double> Read(String inputname, int answer) {
 		ArrayList<Double>result2=new ArrayList<>();
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(inputname));
@@ -37,7 +37,13 @@ public class Work_with_txt implements FileBuilder {
      			str = reader.readLine();
 				if(str!=null)
 				{
-				   result.add(calculations.c(str));
+					if(answer==1)
+					{
+						encryption encr = new encryption();
+						str = encr.decrypt(str);
+						
+					}
+				   result2.add(calculations.c(str));
 				}
 			}
 		} catch (IOException e) {
@@ -48,12 +54,20 @@ public class Work_with_txt implements FileBuilder {
 	}
 
 	@Override
-	public void Write(String outputname) {
+	public void Write(String outputname, int answer) {
 		try {
 			PrintStream fileOut = new PrintStream(outputname);
 			for(int i = 0; i < result.size(); i++)
 			{
+				if(answer == 1)
+				{
+					encryption encr = new encryption();
+					fileOut.println(encr.encrypt(String.valueOf(result.get(i))));
+				}
+				else
+				{
 				fileOut.println(result.get(i));
+				}
 			}
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

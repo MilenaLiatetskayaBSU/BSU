@@ -31,7 +31,7 @@ public class Work_with_json implements FileBuilder{
 		}
 	}
 	
-	public ArrayList<Double> Read_without_API(String inputname) throws IOException
+	public ArrayList<Double> Read_without_API(String inputname, int answer) throws IOException
 	{
 		BufferedReader reader= new BufferedReader(new FileReader(inputname));
 		
@@ -56,7 +56,18 @@ public class Work_with_json implements FileBuilder{
 					}
 				task+=String.valueOf(result.charAt(i));
 			}
-			result2.add(calculations.c(task));
+			
+			if(answer==1)
+			{
+				encryption enc = new encryption();
+				result2.add(calculations.c(enc.decrypt( task)));
+			}
+			else
+			{
+				result2.add(calculations.c(task));
+			}
+			
+			
 		}
 		 
 		return result2;
@@ -64,7 +75,7 @@ public class Work_with_json implements FileBuilder{
 	}
 	
 	@Override
-	public ArrayList<Double> Read(String inputname) {
+	public ArrayList<Double> Read(String inputname, int answer) {
 	
 		BufferedReader reader;
 		 ArrayList<Double>result2=new ArrayList<>();
@@ -82,7 +93,19 @@ public class Work_with_json implements FileBuilder{
         		}
         		
         		JSONObject object = (JSONObject) new JSONTokener(result).nextValue();
-        		result2.add(calculations.c(object.getString("task")));
+        		
+        		if(answer == 1)
+        		{
+        			encryption enc = new encryption();
+        			result2.add(calculations.c(enc.decrypt(object.getString("task"))));
+        		}
+        		
+        		else
+        		{
+        			result2.add(calculations.c(object.getString("task")));
+        		}
+        		
+        		
          }
        	 
        	 
@@ -100,18 +123,28 @@ public class Work_with_json implements FileBuilder{
 
 	
 	
-	public void Write_without_API(String outputname) throws FileNotFoundException
+	public void Write_without_API(String outputname, int answer) throws FileNotFoundException
 	{
 		PrintStream fileOut = new PrintStream(outputname);
 		
 		for(int i = 0; i < result.size(); i++)
 		{
-			fileOut.println("{\"result\":"+result.get(i)+"}");
+			if(answer==1)
+			{
+				encryption enc = new encryption();
+				fileOut.println("{\"result\":"+enc.encrypt(String.valueOf(result.get(i))) +"}");
+			}
+			else
+			{
+				fileOut.println("{\"result\":"+result.get(i)+"}");
+			}
+			
+			
 		}
 	}
 	
 	@Override
-	public void Write(String outputname) {
+	public void Write(String outputname, int answer) {
 		try {
 			PrintStream fileOut = new PrintStream(outputname);
 			JSONObject resultJson = new JSONObject();
@@ -119,7 +152,17 @@ public class Work_with_json implements FileBuilder{
 			
 			for(int i = 0; i < result.size(); i++)
 			{
-				resultJson.put("result", result.get(i));
+				if(answer==1)
+				{
+					encryption en = new encryption();
+					resultJson.put("result", en.encrypt(String.valueOf(result.get(i)) ));
+				}
+				else
+				{
+					resultJson.put("result", result.get(i));
+				}
+				
+				
 				fileOut.print(resultJson.toString());
 			}
 			

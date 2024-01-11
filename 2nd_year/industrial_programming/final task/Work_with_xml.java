@@ -45,20 +45,30 @@ public class Work_with_xml implements FileBuilder{
 		}
 	}
 	
-	public void Write_without_API(String outputname) throws FileNotFoundException
+	public void Write_without_API(String outputname, int answer) throws FileNotFoundException
 	{
 		PrintStream fileOut = new PrintStream(outputname);
 		fileOut.println("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>");
 		fileOut.println("<Results>");
 		for(int i = 0; i < result.size(); i++)
 		{
-			fileOut.println("<answers>"+result.get(i)+"</answers>");
+			if(answer==1)
+			{
+				encryption enc = new encryption();
+				fileOut.println("<answers>"+enc.encrypt(String.valueOf( result.get(i)))+"</answers>");
+			}
+			else
+			{
+				fileOut.println("<answers>"+result.get(i)+"</answers>");
+			}
+			
+			
 		}
 		
 		fileOut.println("</Results>");
 	}
 	
-	public ArrayList<Double>Read_without_API(String inputname)
+	public ArrayList<Double>Read_without_API(String inputname, int answer)
 	{
 		 ArrayList<Double>result2=new ArrayList<>();
 		 try {
@@ -86,7 +96,18 @@ public class Work_with_xml implements FileBuilder{
 	     						task+=String.valueOf(str.charAt(i));
 	     					}
 	     				}
-	     				result2.add(calculations.c(task));
+	     				
+	     				if(answer==1)
+	     				{
+	     					encryption enc = new encryption();
+	     					result2.add(calculations.c(enc.decrypt(task) ));
+	     				}
+	     				else
+	     				{
+	     					result2.add(calculations.c(task));
+	     				}
+	     				
+	     				
 	     			}
 				
 				}
@@ -98,7 +119,7 @@ public class Work_with_xml implements FileBuilder{
 	}
 	
 	@Override
-	public ArrayList<Double> Read(String inputname) {
+	public ArrayList<Double> Read(String inputname, int answer) {
 		 ArrayList<Double>result2=new ArrayList<>();
 		 try {
 	   
@@ -124,7 +145,17 @@ public class Work_with_xml implements FileBuilder{
 	                        
 	                        	if(bookProp.getNodeName()=="task")
 	                        	{
-	                        		result2.add(calculations.c(bookProp.getChildNodes().item(0).getTextContent()));
+	                        		if(answer==1)
+	                        		{
+	                        			encryption enc = new encryption();
+	                        			result2.add(calculations.c(enc.decrypt( (bookProp.getChildNodes().item(0).getTextContent()))));
+	                        		}
+	                        		else
+	                        		{
+	                        			result2.add(calculations.c(bookProp.getChildNodes().item(0).getTextContent()));
+	                        		}
+	                        		
+	                        		
 	                        		
 	                        	}
 	                        	
@@ -150,7 +181,7 @@ public class Work_with_xml implements FileBuilder{
 	}
 
 	@Override
-	public void Write(String outputname) {
+	public void Write(String outputname, int answer) {
 		 try {
 
 	            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
@@ -171,9 +202,19 @@ public class Work_with_xml implements FileBuilder{
 	            
 	            Element res = doc.createElement("answers");
 	            rootElement.appendChild(res);
-
-	            res.appendChild(doc.createTextNode(Double.toString(result.get(i))));
 	            
+	           
+	            if(answer==1)
+	            {
+	            	encryption enc = new encryption();
+	            	res.appendChild(doc.createTextNode(enc.encrypt( (Double.toString(result.get(i))))));
+	            }
+	            else
+	            {
+	            	res.appendChild(doc.createTextNode(Double.toString(result.get(i))));
+	            }
+					
+				
 
 	           
 	            TransformerFactory transformerFactory = TransformerFactory.newInstance();

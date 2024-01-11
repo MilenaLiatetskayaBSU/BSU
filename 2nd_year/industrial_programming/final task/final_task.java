@@ -7,8 +7,7 @@ public class final_task {
 	public static void main(String[] args) throws IOException
 	{
 		
-		archiving arch = new archiving();
-		arch.archive("archieve", "input.txt");
-		arch.read("archieve");
+		Console console = new Console();
+		console.dialog();		
 	}
 }
