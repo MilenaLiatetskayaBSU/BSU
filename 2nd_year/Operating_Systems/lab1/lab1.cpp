@@ -1,6 +1,7 @@
-﻿#include <Windows.h>
+﻿
 #include <iostream>
 #include <process.h>
+#include <Windows.h>
 using namespace std;
 
 
@@ -11,7 +12,7 @@ struct res
 	int count;
 };
 
-DWORD WINAPI Worker ( LPVOID  rez)
+DWORD WINAPI Worker(LPVOID  rez)
 {
 	res* rezult = (res*)rez;
 	int max = rezult->mas[0];
@@ -40,17 +41,13 @@ int main()
 	rezult.mas = new int[rezult.count];
 	for (int i = 0; i < rezult.count; i++)
 	{
-		rezult.mas[i] = rand() % 40;
+		cin>>rezult.mas[i];
 	}
 
-	for (int i = 0; i < rezult.count; i++)
-	{
-		cout << rezult.mas[i] << " ";
-	}
 	hThread = CreateThread(NULL, 0, Worker, &rezult, 0, &IDThread);
 	if (hThread == NULL)
 		return GetLastError();
-	if (hThread != NULL) 
+	if (hThread != NULL)
 	{
 		SuspendThread(hThread);
 		Sleep(1000);
@@ -58,5 +55,7 @@ int main()
 	}
 	WaitForSingleObject(hThread, INFINITE);
 	CloseHandle(hThread);
-	cout << endl << rezult.res;
+
+	cout << rezult.res;
+	return rezult.res;
 }
