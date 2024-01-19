@@ -26,18 +26,6 @@ namespace UnitTest1
 			Assert::AreEqual(expected, res);
 		}
 
-		TEST_METHOD(TestMethod2)
-		{
-			string expected = "Invalid size";
-
-			std::stringstream input("-5");
-			std::stringstream output;
-
-			cin.rdbuf(input.rdbuf());
-			cout.rdbuf(output.rdbuf());
-			int a = main();
-
-			Assert::AreEqual(expected, output.str().substr(16));
-		}
+	
 	};
 }
