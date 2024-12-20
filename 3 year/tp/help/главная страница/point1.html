@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple website</title>
+    <link rel="stylesheet" href="file.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  </head>
+  <style>
+    body {
+        font-family: 'Bradley Hand',  cursive;
+            margin: 0;
+            padding: 0;
+            background-image: url('imgg.jpg'); 
+            background-size: cover; 
+            background-position: center; 
+        }
+        header {
+            background-color: #7ec9fa;
+            color: rgba(108, 189, 243, 0.548);
+            padding: 10px 0;
+            text-align: center; 
+        }
+        nav a {
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+            margin: 0 20px; 
+            font-size: 1em;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        main {
+            max-width: 800px; 
+            margin: 20px auto; 
+            padding: 20px;
+            background-color: rgba(217, 220, 224, 0.534); 
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(86, 157, 240, 0.247); 
+            font-size: 1.5em;
+        }
+        footer {
+            text-align: center; 
+            margin: 20px 0; 
+            font-size: 1em; 
+            color: white;
+        }
+        footer a {
+            color: white; 
+            text-decoration: underline; 
+        }
+
+         /* Стиль для модального окна */
+         #phoneModal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+        }
+        #phoneModalContent {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        #phoneModalContent p {
+            font-size: 1.2em;
+        }
+        #closeModal {
+            background-color: #589da7;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        #closeModal:hover {
+            background-color: hsl(131, 11%, 54%);
+        }
+       
+
+ /* Стиль для модального окна помощи */
+ #helpModal {
+        display: none; /* Скрыто по умолчанию */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        justify-content: center;
+        align-items: center;
+    }
+    #helpModalContent {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        width: 300px;
+        text-align: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+    #helpModalContent p {
+        font-size: 1.2em;
+        margin: 10px 0;
+    }
+    #closeHelpModal {
+        background-color: #589da7;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        margin-top: 10px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    #closeHelpModal:hover {
+        background-color: hsl(131, 11%, 54%);
+    }
+
+
+
+</style>
+<body>
+
+    <header>
+        <nav>
+            <a href="#clinics">Клиника "Успокоение"</a>
+            <a href="#news">Новости</a>
+            <a href="#help" onclick="showHelpModal()">Помощь</a>          
+             <a href="#contacts" onclick="showPhoneModal()">Контакты</a>
+        </nav>
+    </header>
+    
+    <main>
+        <h1>Добро пожаловать!</h1>
+        <p>В нашем спокойном и уютном пространстве мы приглашаем вас погрузиться в атмосферу расслабления и гармонии. 
+        Здесь вы можете отдохнуть от повседневной суеты и насладиться моментом тишины.</p>
+        <p>Мы предлагаем различные методики, направленные на успокоение ума и тела. 
+        Позвольте себе насладиться медитацией, глубоким дыханием и практиками, которые помогут вам восстановить внутренний баланс.</p>
+        <p>Наши специалисты готовы поддержать вас на пути к внутреннему спокойствию и благополучию. 
+        Погрузитесь в мир, где каждый момент способствует вашему восстановлению и укреплению здоровья.</p>
+    </main>
+    
+     <footer>
+        <p>Для бронирования процедур <a href="../Новая папка/website.html">войдите в аккаунт</a>.</p>
+    </footer> 
+
+
+<!-- Модальное окно для номера телефона -->
+<div id="phoneModal">
+    <div id="phoneModalContent">
+       
+        <p>Наш номер телефона:</p>
+        <p>+375 (44) 456-78-90</p>
+        <button id="closeModal" onclick="closePhoneModal()">Закрыть</button>
+    </div>
+</div>
+
+ <!-- Модальное окно для помощи -->
+ <div id="helpModal">
+    <div id="helpModalContent">
+        <p>Не удалось найти нужную информацию?</p>
+        <p>Свяжитесь с нами по почте:</p>
+        <p><strong>support@team.com</strong></p>
+        <button id="closeHelpModal" onclick="closeHelpModal()">Закрыть</button>
+    </div>
+</div>
+
+
+
+<script>
+    // Функция для отображения модального окна
+    function showPhoneModal() {
+        document.getElementById("phoneModal").style.display = "flex";
+    }
+
+    // Функция для закрытия модального окна
+    function closePhoneModal() {
+        document.getElementById("phoneModal").style.display = "none";
+    }
+
+
+    // Функция для отображения модального окна помощи
+    function showHelpModal() {
+        document.getElementById("helpModal").style.display = "flex";
+    }
+
+    // Функция для закрытия модального окна помощи
+    function closeHelpModal() {
+        document.getElementById("helpModal").style.display = "none";
+    }
+
+ы
+
+</script>
+
+    </body>
+</html>

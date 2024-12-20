@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Календарь Записей</title>
+  <link rel="stylesheet" href="file3.css">
+</head>
+<body>
+  <header>
+    <h1>Календарь Записей</h1>
+    <div class="profile-container">
+      <img src="default-profile.png" alt="Фото профиля" id="profile-image" class="profile-image">
+      <input type="file" id="upload-profile-image" accept="image/*" style="display:none;">
+      <button id="upload-button">Загрузить фото</button>
+  </div>
+  </header>
+
+  <main>
+    <!-- Календарь -->
+    <section id="calendar-section">
+      <h2>Выберите день:</h2>
+      <div class="calendar" id="calendar"></div>
+    </section>
+
+    <!-- Доступные процедуры -->
+    <section id="procedure-list" style="display: none;">
+      <h2>Процедуры для <span id="selected-date"></span>:</h2>
+      <ul id="procedures"></ul>
+    </section>
+
+    <!-- Записи пациента -->
+    <section id="patient-records">
+      <h2>Ваши записи:</h2>
+      <ul id="records"></ul>
+    </section>
+
+
+    <!-- Кнопка для возврата на главную страницу -->
+<section id="back-to-home">
+  <button onclick="goToHomePage()">Назад</button>
+</section>
+
+  </main>
+
+  <script src="app3.js"></script>
+</body>
+</html>
